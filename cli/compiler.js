@@ -1,14 +1,16 @@
 import webpack from 'webpack'
+import EventEmitter from 'events'
 import config from '../webpack.config.js'
 
 const compiler = webpack(config)
+const emitter = new EventEmitter()
 
 function handler (err, stats) {
   if (err || stats.hasErrors()) {
-    console.error(err)
+    return emitter.emit('error', err)
   }
 
-  console.log(stats.toString({
+  emitter.emit('compiled', stats.toString({
     colors: true
   }))
 }
@@ -18,3 +20,5 @@ if (config.mode === 'production') {
 } else {
   compiler.watch({}, handler)
 }
+
+export default emitter

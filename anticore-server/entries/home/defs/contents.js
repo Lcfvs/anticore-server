@@ -2,7 +2,6 @@ import { fragment } from '@lcf.vs/dom-engine'
 
 export default fragment(`
 <form action="{action}" enctype="multipart/form-data" method="post">
-  {confirm}
   <fieldset>
     <p class="title">
       <label>
@@ -44,6 +43,7 @@ export default fragment(`
     </p>
   </fieldset>
   <button>Generate</button>
+  {confirm}
 </form>
 `, {
   action: '',
@@ -58,7 +58,7 @@ import { on } from 'anticore'
 on('', element => {
 
 })
-  `,
+`,
   description: '',
   path: '',
   title: '',

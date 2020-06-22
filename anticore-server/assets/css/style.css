@@ -130,6 +130,18 @@ main.anticore-server fieldset:first-of-type input {
   width: calc(100% - 8.5em)
 }
 
+main.anticore-server a {
+  background: rgb(166, 38, 57);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: .3em;
+  height: var(--css-ui--menu--icon-size);
+  display: inline-block;
+  position: absolute;
+  margin-left: 0.5em;
+  line-height: var(--css-ui--menu--icon-size);
+}
+
 main.anticore-server button {
   color: green;
   background: #090a0f;
@@ -137,8 +149,14 @@ main.anticore-server button {
   width: auto;
   padding-left: 0.5em;
   padding-right: 0.5em;
+  border-radius: .3em;
 }
 
-main.anticore-server button:hover {
+main.anticore-server > a:hover,
+main.anticore-server > button:hover {
   filter: brightness(1.75);
+}
+
+main.anticore-server ~ nav .anticore-server {
+  color: var(--theme--menu-current-color)
 }

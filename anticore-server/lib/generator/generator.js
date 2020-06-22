@@ -12,7 +12,7 @@ import view from './view.js'
 export default {
   async generate (body) {
     const { uri } = body
-    const project = `./project`
+    const project = './project'
     const assets = `${project}/assets`
     const js = `${assets}/js`
     const entries = `${project}/entries`
@@ -34,7 +34,7 @@ export default {
       current: (await promises.readFile(`${project}/root.js`)).toString()
     }))
     await promises.writeFile(`${js}/contracts.js`, contracts({
-      defs,
+      entries,
       uri,
       current: (await promises.readFile(`${js}/contracts.js`)).toString()
     }))

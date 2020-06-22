@@ -1,3 +1,11 @@
 @import "https://unpkg.com/@lcf.vs/css-ui@3.0.7/css-ui.min.css";
 @import "https://unpkg.com/@lcf.vs/css-ui@3.0.7/components/menu/expanded/expanded.min.css";
 @import "../../../anticore-server/assets/css/style.css";
+
+body > nav > ol a {
+  margin-left: var(--css-ui--menu--icon-size);
+}
+
+main.home ~ nav .home {
+  color: var(--theme--menu-current-color)
+}
