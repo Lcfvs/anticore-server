@@ -3,7 +3,7 @@
 @import "../../../anticore-server/assets/css/style.css";
 
 body > nav > ol a {
-  margin-left: var(--css-ui--menu--icon-size);
+  padding-left: var(--css-ui--menu--icon-size);
 }
 
 main.home ~ nav .home {
