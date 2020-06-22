@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "**[ALPHA]** An anticore server example",
   "type": "module",
-  "engines": {
-    "node": ">=14.0"
-  },
   "scripts": {
     "start": "./node_modules/node/node_modules/.bin/node ./node_modules/nodemon/bin/nodemon.js ./src/server.js",
     "serve": "node ./src/server.js",
@@ -24,12 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/Lcfvs/anticore-server.git"
   },
-  "keywords": [
-    "JavaScript",
-    "anticore",
-    "server",
-    "example"
-  ],
+  "keywords": ["JavaScript", "anticore", "server", "example"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Lcfvs/anticore-server/issues"
