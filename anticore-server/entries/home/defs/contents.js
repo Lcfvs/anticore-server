@@ -6,13 +6,13 @@ export default fragment(`
     <p class="title">
       <label>
         Title
-        <input name="title" pattern="[^ ]+" placeholder="The page title" required value="{title}" />
+        <input name="title" pattern=".+" placeholder="The page title" required value="{title}" />
       </label>
     </p>
     <p class="description">
       <label>
         Description
-        <input name="description" pattern="[^ ]+" placeholder="The page description" required value="{description}" />
+        <input name="description" pattern=".+" placeholder="The page description" required value="{description}" />
       </label>
     </p>
     <p class="uri">
