@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-import config from '../../webpack.config.js'
+import config from '../webpack.config.js'
 
 const compiler = webpack(config)
 
@@ -13,4 +13,8 @@ function handler (err, stats) {
   }))
 }
 
-compiler.run(handler)
+if (config.mode === 'production') {
+  compiler.run(handler)
+} else {
+  compiler.watch({}, handler)
+}

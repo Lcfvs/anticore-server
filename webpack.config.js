@@ -1,4 +1,4 @@
-import { production } from './src/env.js'
+import { production } from './env.js'
 import path from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserJSPlugin from 'terser-webpack-plugin'
