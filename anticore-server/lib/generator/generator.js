@@ -9,14 +9,26 @@ import root from './root.js'
 import routes from './routes.js'
 import view from './view.js'
 
+function parsePath ({ uri, ...body }) {
+  return {
+    ...body,
+    uri,
+    path: uri.split('/')
+      .map(segment => segment.split('-').map((word, key) => key
+        ? `${word[0].toUpperCase()}${word.slice(1)}`
+        : word).join(''))
+      .join('/')
+  }
+}
+
 export default {
   async generate (body) {
-    const { uri } = body
+    const { path } = parsePath(body)
     const project = './project'
     const assets = `${project}/assets`
     const js = `${assets}/js`
     const entries = `${project}/entries`
-    const directory = `${entries}/${uri}`
+    const directory = `${entries}/${path}`
     const defs = `${directory}/defs`
     const name = basename(directory)
     const filename = `${directory}/${name}.js`
@@ -30,12 +42,12 @@ export default {
     await promises.writeFile(`${filename}`, module(body))
     await promises.writeFile(`${project}/root.js`, root({
       name,
-      uri,
+      path,
       current: (await promises.readFile(`${project}/root.js`)).toString()
     }))
     await promises.writeFile(`${js}/contracts.js`, contracts({
       entries,
-      uri,
+      path,
       current: (await promises.readFile(`${js}/contracts.js`)).toString()
     }))
   }
