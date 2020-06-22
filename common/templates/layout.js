@@ -7,6 +7,8 @@ export default document(`<!DOCTYPE html>
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
     {meta}
     {refresh}
+    {styles}
+    {scripts}
     <link href="/assets/css/style.min.css" media="screen" rel="stylesheet" />
     <script src="/assets/js/main.min.js" type="module"></script>
   </head>
@@ -28,5 +30,7 @@ export default document(`<!DOCTYPE html>
   meta: null,
   nav: null,
   notifiers: '',
-  refresh: ''
+  refresh: '',
+  scripts: '',
+  styles: ''
 })

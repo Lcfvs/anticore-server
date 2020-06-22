@@ -12,6 +12,8 @@ export const item = fragment(`
 
 export default fragment(`
 <nav>
+  <a aria-label="Open menu" href="javascript:" role="button" tabindex="1">☰</a>
+  <a aria-label="Close menu" href="javascript:" role="button" tabindex="-1"></a>
   <ol>
     {items}
   </ol>

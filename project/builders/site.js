@@ -1,3 +1,3 @@
 export default {
-  branding: 'example.com'
+  branding: 'anticore.tools'
 }

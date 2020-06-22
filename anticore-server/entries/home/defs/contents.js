@@ -4,26 +4,25 @@ export default fragment(`
 <form action="{action}" enctype="multipart/form-data" method="post">
   {confirm}
   <fieldset>
-    <legend>Metadata</legend>
-    <p>
+    <p class="title">
       <label>
         Title
         <input name="title" pattern="[^ ]+" placeholder="The page title" required value="{title}" />
       </label>
     </p>
-    <p>
+    <p class="description">
       <label>
         Description
         <input name="description" pattern="[^ ]+" placeholder="The page description" required value="{description}" />
       </label>
     </p>
-    <p>
+    <p class="uri">
       <label>
         URI
         <input name="uri" pattern="^/[\\w\\d-]+(/[\\w\\d-]+)*$" placeholder="/uri" required value="{uri}" />
       </label>
     </p>
-    <p>
+    <p class="class">
       <label>
         Class
         <input name="class" pattern="^\\w[\\w\\d-]+$" placeholder="class-name" required value="{class}" />
@@ -31,14 +30,13 @@ export default fragment(`
     </p>
   </fieldset>
   <fieldset>
-    <legend>Code</legend>
-    <p>
+    <p class="contents">
       <label>
         Contents (HTML)
         <textarea name="contents">{contents}</textarea>
       </label>
     </p>
-    <p>
+    <p class="contract">
       <label>
         Contract (JS)
         <textarea name="contract">{contract}</textarea>
@@ -51,8 +49,16 @@ export default fragment(`
   action: '',
   class: '',
   confirm: '',
-  contents: '',
-  contract: '',
+  contents: `<section>
+  <h1></h1>
+</section>`,
+  contract: `
+import { on } from 'anticore'
+
+on('', element => {
+
+})
+  `,
   description: '',
   path: '',
   title: '',
