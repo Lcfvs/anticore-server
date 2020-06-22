@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "**[ALPHA]** An anticore server example",
   "type": "module",
-  "module": "src/server.js",
   "engines": {
     "node": ">=14.0"
   },
@@ -14,7 +13,7 @@
   },
   "author": "lcf.vs <michael.rouges@gmail.com>",
   "dependencies": {
-    "@lcf.vs/dom-engine": "https://github.com/Lcfvs/dom-engine/tarball/master",
+    "@lcf.vs/dom-engine": "0.0.4",
     "anticore": "^4.2.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
