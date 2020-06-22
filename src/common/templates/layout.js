@@ -7,8 +7,8 @@ export default document(`<!DOCTYPE html>
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
     {meta}
     {refresh}
-    <link href="/src/projectject/assets/css/style.css" media="screen" rel="stylesheet" />
-    <script src="/src/projectject/assets/js/main.js" type="module"></script>
+    <link href="/assets/css/style.min.css" media="screen" rel="stylesheet" />
+    <script src="/assets/js/main.min.js" type="module"></script>
   </head>
   <body>
     <header>

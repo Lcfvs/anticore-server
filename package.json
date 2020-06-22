@@ -4,7 +4,8 @@
   "description": "**[ALPHA]** An anticore server example",
   "type": "module",
   "scripts": {
-    "start": "./node_modules/node/node_modules/.bin/node ./node_modules/nodemon/bin/nodemon.js ./src/server.js"
+    "start": "node ./src/server.js",
+    "build": "node ./src/cli/webpack.js"
   },
   "author": "lcf.vs <michael.rouges@gmail.com>",
   "dependencies": {

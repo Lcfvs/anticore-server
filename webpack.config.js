@@ -28,11 +28,11 @@ export default {
   },
   output: {
     path: path.resolve('dist/assets'),
-    filename: '[name].min.js'
+    filename: 'js/[name].min.js'
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].min.css',
+      filename: 'css/[name].min.css',
       ignoreOrder: false
     })
   ]
