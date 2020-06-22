@@ -10,7 +10,7 @@
   "author": "lcf.vs <michael.rouges@gmail.com>",
   "dependencies": {
     "@lcf.vs/dom-engine": "0.0.4",
-    "anticore": "^4.2.1",
+    "anticore": "^4.2.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "multer": "^1.4.2",
@@ -20,7 +20,12 @@
     "type": "git",
     "url": "git+https://github.com/Lcfvs/anticore-server.git"
   },
-  "keywords": ["JavaScript", "anticore", "server", "example"],
+  "keywords": [
+    "JavaScript",
+    "anticore",
+    "server",
+    "example"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Lcfvs/anticore-server/issues"
