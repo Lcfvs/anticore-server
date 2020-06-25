@@ -1,6 +1,6 @@
 # @lcf.vs/dom-engine
 
-**[ALPHA]** A composable DOM based template engine
+**[ALPHA]** An [anticore](https://github.com/Lcfvs/anticore) server example, based on [@lcf.vs/dom-engine](https://github.com/Lcfvs/dom-engine)
 
 ## Install
 
