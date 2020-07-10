@@ -1,6 +1,6 @@
-import { fragment } from '@lcf.vs/dom-engine'
+import { template } from '@lcf.vs/dom-engine/lib/backend.js'
 
-export default fragment(`
+export default template(`
 <form action="{action}" enctype="multipart/form-data" method="post">
   <fieldset>
     <p class="title">

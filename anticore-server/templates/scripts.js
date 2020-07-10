@@ -1,6 +1,6 @@
-import { fragment } from '@lcf.vs/dom-engine'
+import { template } from '@lcf.vs/dom-engine/lib/backend.js'
 
-export default fragment(`
+export default template(`
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.50.2/codemirror.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.50.2/addon/display/autorefresh.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.50.2/addon/mode/multiplex.min.js"></script>

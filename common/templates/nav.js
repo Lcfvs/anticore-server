@@ -1,6 +1,6 @@
-import { fragment } from '@lcf.vs/dom-engine'
+import { template } from '@lcf.vs/dom-engine/lib/backend.js'
 
-export const item = fragment(`
+export const item = template(`
 <li>
   <a class="{class}" href="{uri}">{title}</a>
 </li>
@@ -10,7 +10,7 @@ export const item = fragment(`
   uri: null
 })
 
-export default fragment(`
+export default template(`
 <nav>
   <a aria-label="Open menu" href="javascript:" role="button" tabindex="1">☰</a>
   <a aria-label="Close menu" href="javascript:" role="button" tabindex="-1"></a>

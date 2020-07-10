@@ -1,6 +1,6 @@
-import { fragment } from '@lcf.vs/dom-engine'
+import { template } from '@lcf.vs/dom-engine/lib/backend.js'
 
-export default fragment(`<main class="{class}">
+export default template(`<main class="{class}">
   <h1>{title}</h1>
   {contents}
 </main>`, {

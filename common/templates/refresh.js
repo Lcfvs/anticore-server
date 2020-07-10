@@ -1,6 +1,6 @@
-import { fragment } from '@lcf.vs/dom-engine'
+import { template } from '@lcf.vs/dom-engine/lib/backend.js'
 
-export default fragment(`
+export default template(`
 <meta http-equiv="refresh" content="{delay};URL={url}"> 
 `, {
   delay: null,

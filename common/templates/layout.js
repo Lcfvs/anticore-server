@@ -1,6 +1,6 @@
-import { document } from '@lcf.vs/dom-engine'
+import { template } from '@lcf.vs/dom-engine/lib/backend.js'
 
-export default document(`<!DOCTYPE html>
+export default template(`<!DOCTYPE html>
 <html lang="{lang}">
   <head>
     <meta charset="UTF-8">
