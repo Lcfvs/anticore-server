@@ -18,19 +18,19 @@ on('title', (title, url) => {
   const metas = [...parentNode.querySelectorAll(':scope > meta')]
   const elements = [main, title, ...metas]
 
-  if (title.matches('body.anticore > title')) {
-    if (!main.classList.contains('error')) {
-      const state = {
-        key: history.push(elements) - 1
-      }
+  window.scrollTo(0, 0)
 
-      window.history.pushState(state, title.innerHTML, url)
+  if (!main.classList.contains('error')) {
+    const state = {
+      key: history.push(elements) - 1
     }
 
-    window.scrollTo(0, 0)
-    elements.forEach(replace)
-  } else {
+    window.history.pushState(state, title.innerHTML, url)
     history.push(elements)
+  }
+
+  if (title.matches('.anticore > title')) {
+    elements.forEach(replace)
   }
 })
 
