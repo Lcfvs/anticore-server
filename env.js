@@ -2,7 +2,7 @@ import './cwd.cjs'
 import dotenv from 'dotenv'
 
 dotenv.config({
-  path: '../.env'
+  path: './.env'
 })
 
 export const production = process.env.NODE_ENV === 'production'
