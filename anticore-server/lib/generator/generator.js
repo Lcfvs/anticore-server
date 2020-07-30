@@ -7,6 +7,8 @@ import contracts from './contracts.js'
 import module from './module.js'
 import root from './root.js'
 import routes from './routes.js'
+import style from './style.js'
+import styles from './styles.js'
 import view from './view.js'
 
 function parsePath ({ uri, ...body }) {
@@ -25,17 +27,19 @@ export default {
   async generate (body) {
     const { path } = parsePath(body)
     const project = './project'
-    const assets = `${project}/assets`
+    const assets = `${project}/public/assets`
     const js = `${assets}/js`
+    const css = `${assets}/css`
     const entries = `${project}/entries`
-    const directory = `${entries}/${path}`
+    const directory = `${entries}${path}`
     const defs = `${directory}/defs`
     const name = basename(directory)
     const filename = `${directory}/${name}.js`
 
     await promises.mkdir(defs, { recursive: true })
-    await promises.writeFile(`${defs}/config.js`, config({ ...body, js }))
+    await promises.writeFile(`${defs}/config.js`, config({ ...body, defs }))
     await promises.writeFile(`${defs}/contract.js`, contract(body))
+    await promises.writeFile(`${defs}/styles.css`, style(body))
     await promises.writeFile(`${defs}/contents.js`, contents(body))
     await promises.writeFile(`${defs}/routes.js`, routes(body))
     await promises.writeFile(`${defs}/view.js`, view(body))
@@ -49,6 +53,11 @@ export default {
       entries,
       path,
       current: (await promises.readFile(`${js}/contracts.js`)).toString()
+    }))
+    await promises.writeFile(`${css}/styles.css`, styles({
+      entries,
+      path,
+      current: (await promises.readFile(`${css}/styles.css`)).toString()
     }))
   }
 }

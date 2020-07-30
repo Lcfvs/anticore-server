@@ -1,6 +1,15 @@
-export default function config ({ contract, contents, data, js, ...body }) {
-  return `export default ${JSON.stringify({
-    ...body,
-    contract: `${js}/contract.js`
-  }, null, 2)}`
+function escape (str) {
+  return str.replace('\'', '\\\'')
+}
+
+export default function config ({ contract, contents, data, defs, ...body }) {
+  return `export default {
+  title: '${escape(body.title)}',
+  description: '${escape(body.description)}',
+  uri: '${body.uri}',
+  class: '${body.class}',
+  contract: '${defs}/contract.js',
+  styles: '${defs}/styles.css'
+}
+`
 }

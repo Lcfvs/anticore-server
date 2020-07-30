@@ -16,7 +16,7 @@ Then go to http://localhost:8080/
 
 ## Disable the generator
 
-Create an `.env` file containing this variable
+Modify the `.env` file containing this variable
 
 ```shell script
 NODE_ENV=production

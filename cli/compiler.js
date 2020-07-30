@@ -7,7 +7,10 @@ const emitter = new EventEmitter()
 
 function handler (err, stats) {
   if (err || stats.hasErrors()) {
-    return emitter.emit('error', err)
+    return emitter.emit('error', err || stats.toString({
+      // Add console colors
+      colors: true
+    }))
   }
 
   emitter.emit('compiled', stats.toString({

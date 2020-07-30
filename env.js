@@ -5,5 +5,9 @@ dotenv.config({
   path: './.env'
 })
 
-export const production = process.env.NODE_ENV === 'production'
-export const port = process.env.PORT || 8080
+export const {
+  FALLBACK,
+  NODE_ENV,
+  ORIGIN,
+  production = NODE_ENV === 'production'
+} = process.env

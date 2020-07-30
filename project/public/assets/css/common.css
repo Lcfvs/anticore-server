@@ -1,0 +1,3 @@
+body > nav > ol a {
+  padding-left: var(--css-ui--menu--icon-size);
+}

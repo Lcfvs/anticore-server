@@ -1,39 +1,73 @@
 import { production } from './env.js'
-import path from 'path'
+import { resolve } from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserJSPlugin from 'terser-webpack-plugin'
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 
 const mode = production ? 'production' : 'development'
 
-export default {
-  mode,
-  entry: {
-    main: path.resolve('project/assets/js/main.js'),
-    style: path.resolve('project/assets/css/style.css')
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
-        ]
-      }
+const configs = [
+  {
+    mode,
+    target: 'web',
+    entry: {
+      main: resolve('project/public/assets/js/main.js'),
+      styles: resolve('project/public/assets/css/styles.css')
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/
+        },
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    optimization: {
+      minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
+    },
+    output: {
+      path: resolve('project/public/dist/assets'),
+      filename: 'js/[name].min.js'
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].min.css',
+        ignoreOrder: false
+      })
     ]
   },
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
-  },
-  output: {
-    path: path.resolve('dist/assets'),
-    filename: 'js/[name].min.js'
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].min.css',
-      ignoreOrder: false
-    })
-  ]
-}
+  {
+    mode,
+    target: 'webworker',
+    entry: {
+      sw: resolve('project/public/assets/js/sw.js')
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/
+        }
+      ]
+    },
+    optimization: {
+      minimizer: [new TerserJSPlugin({})]
+    },
+    output: {
+      path: resolve('project/public/dist'),
+      filename: '[name].min.js'
+    }
+  }
+]
+
+export default configs

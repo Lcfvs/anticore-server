@@ -32,4 +32,5 @@ process.once('exit', () => (exited = true))
 
 export default function launcher (compiler) {
   compiler.once('compiled', run)
+  compiler.once('error', error => console.error(error))
 }

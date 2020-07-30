@@ -2,7 +2,7 @@ import { listen, on } from 'anticore'
 
 const history = []
 
-function replace (element) {
+function replace (element) {console.log(element)
   const tag = element.nodeName.toLowerCase()
   const selector = tag !== 'meta'
     ? tag
@@ -12,10 +12,10 @@ function replace (element) {
   current.parentNode.replaceChild(element, current)
 }
 
-on('title', (title, url) => {
-  const { parentNode } = title
-  const main = parentNode.querySelector('main')
-  const metas = [...parentNode.querySelectorAll(':scope > meta')]
+on('main', (main, url) => {
+  const { parentNode } = main
+  const title = parentNode.querySelector('title')
+  const metas = [...parentNode.querySelectorAll(':scope > meta[name]')]
   const elements = [main, title, ...metas]
 
   window.scrollTo(0, 0)
@@ -35,5 +35,5 @@ on('title', (title, url) => {
 })
 
 listen('popstate', window, ({ state: { key } }) => {
-  history[key].forEach(replace)
+  history[key] && history[key].forEach(replace)
 })

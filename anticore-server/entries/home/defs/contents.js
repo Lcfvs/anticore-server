@@ -1,27 +1,30 @@
 import { template } from '@lcf.vs/dom-engine/lib/backend.js'
+import styles from '../../../../common/utils/styles.js'
+
+const classes = styles('./anticore-server/assets/css/style.css')
 
 export default template(`
 <form action="{action}" enctype="multipart/form-data" method="post">
   <fieldset>
-    <p class="title">
+    <p class="${classes.title}">
       <label>
         Title
         <input name="title" pattern=".+" placeholder="The page title" required value="{title}" />
       </label>
     </p>
-    <p class="description">
+    <p class="${classes.description}">
       <label>
         Description
         <input name="description" pattern=".+" placeholder="The page description" required value="{description}" />
       </label>
     </p>
-    <p class="uri">
+    <p class="${classes.uri}">
       <label>
         URI
         <input name="uri" pattern="^/[\\w\\d-]+(/[\\w\\d-]+)*$" placeholder="/uri" required value="{uri}" />
       </label>
     </p>
-    <p class="class">
+    <p class="${classes.class}">
       <label>
         Class
         <input name="class" pattern="^\\w[\\w\\d-]+$" placeholder="class-name" required value="{class}" />
@@ -29,13 +32,13 @@ export default template(`
     </p>
   </fieldset>
   <fieldset>
-    <p class="contents">
+    <p class="${classes.contents}">
       <label>
         Contents (HTML)
         <textarea name="contents">{contents}</textarea>
       </label>
     </p>
-    <p class="contract">
+    <p class="${classes.contract}">
       <label>
         Contract (JS)
         <textarea name="contract">{contract}</textarea>

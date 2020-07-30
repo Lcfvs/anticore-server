@@ -1,13 +1,17 @@
-import config from './config.js'
 import view from './view.js'
 
 export default ({ app, build }) => {
-  app.get(config.uri, ({ xhr }, response) => {
+  app.use((error, request, response, next) => {
+    if (!error) {
+      return next()
+    }
+
+    response.status(500)
+
     response.send(build({
       view: {
         ...view
-      },
-      xhr
+      }
     }))
 
     response.end()
