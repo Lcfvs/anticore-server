@@ -1,4 +1,4 @@
-import { FALLBACK, ORIGIN } from './env.js'
+import { FALLBACK, ORIGIN, PORT } from './env.js'
 import express from 'express'
 import { readFileSync } from 'fs'
 import spdy from 'spdy'
@@ -22,4 +22,4 @@ errors(app, build)
 
 spdy
   .createServer({ key, cert }, app)
-  .listen(443, () => console.log(`Listening on ${ORIGIN}${FALLBACK}`))
+  .listen(PORT, () => console.log(`Listening on ${ORIGIN}:${PORT}${FALLBACK}`))

@@ -9,5 +9,6 @@ export const {
   FALLBACK,
   NODE_ENV,
   ORIGIN,
+  PORT,
   production = NODE_ENV === 'production'
 } = process.env
