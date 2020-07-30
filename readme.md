@@ -12,7 +12,7 @@ npm i
 npm run build
 ```
 
-Then go to http://localhost:8080/
+Then go to http://localhost:1443/fallback
 
 ## Disable the generator
 
