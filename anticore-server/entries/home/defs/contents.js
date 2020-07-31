@@ -21,7 +21,7 @@ export default template(`
     <p class="${classes.uri}">
       <label>
         URI
-        <input name="uri" pattern="^/[\\w\\d-]+(/[\\w\\d-]+)*$" placeholder="/uri" required value="{uri}" />
+        <input name="uri" pattern="^/([\\w\\d-]+(/[\\w\\d-]+)*)?$" placeholder="/uri" required value="{uri}" />
       </label>
     </p>
     <p class="${classes.class}">

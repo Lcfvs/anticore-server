@@ -26,12 +26,13 @@ function parsePath ({ uri, ...body }) {
 export default {
   async generate (body) {
     const { path } = parsePath(body)
+    const resolved = path === '/' ? '/home' : path
     const project = './project'
     const assets = `${project}/public/assets`
     const js = `${assets}/js`
     const css = `${assets}/css`
     const entries = `${project}/entries`
-    const directory = `${entries}${path}`
+    const directory = `${entries}${resolved}`
     const defs = `${directory}/defs`
     const name = basename(directory)
     const filename = `${directory}/${name}.js`
@@ -46,17 +47,17 @@ export default {
     await promises.writeFile(`${filename}`, module(body))
     await promises.writeFile(`${project}/root.js`, root({
       name,
-      path,
+      resolved,
       current: (await promises.readFile(`${project}/root.js`)).toString()
     }))
     await promises.writeFile(`${js}/contracts.js`, contracts({
       entries,
-      path,
+      resolved,
       current: (await promises.readFile(`${js}/contracts.js`)).toString()
     }))
     await promises.writeFile(`${css}/styles.css`, styles({
       entries,
-      path,
+      resolved,
       current: (await promises.readFile(`${css}/styles.css`)).toString()
     }))
   }
