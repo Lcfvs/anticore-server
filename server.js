@@ -1,6 +1,7 @@
 import compression from 'compression'
 import express from 'express'
 import { readFileSync } from 'fs'
+import helmet from 'helmet'
 import multer from 'multer'
 import spdy from 'spdy'
 import build from './common/builders/build.js'
@@ -14,6 +15,7 @@ const upload = multer()
 const key = readFileSync('./certificates/localhost.key')
 const cert = readFileSync('./certificates/localhost.crt')
 
+app.use(helmet())
 app.use(compression())
 app.use(upload.array())
 app.use('/', express.static('project/public/dist'))
