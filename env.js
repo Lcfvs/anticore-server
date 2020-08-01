@@ -6,7 +6,9 @@ dotenv.config({
 })
 
 export const {
+  CERT,
   FALLBACK,
+  KEY,
   NODE_ENV,
   ORIGIN,
   PORT,

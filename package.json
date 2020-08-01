@@ -1,12 +1,12 @@
 {
   "name": "anticore-server",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "**[ALPHA]** An anticore server example",
   "type": "module",
   "main": "server.js",
   "scripts": {
     "cli": "node cli/cli.js",
-    "dev": "nodemon server.js --watch ./certificates/*.* --watch ./dist/** --",
+    "dev": "nodemon server.js --watch ./certificates/*.* --watch ./dist/** --watch ./common/** --watch ./project/** --watch ./*.js --watch ./*.json --watch ./*.cjs --",
     "build": "npm-run-all -p dev cli",
     "start": "nodemon server.js --watch ./certificates/*.* --"
   },

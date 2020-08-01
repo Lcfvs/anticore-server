@@ -7,11 +7,13 @@ import build from './common/builders/build.js'
 import cache from './common/cache/cache.js'
 import { certificates } from './common/certificates/certificates.js'
 import entries from './entries.js'
-import { FALLBACK, ORIGIN, PORT } from './env.js'
+import { CERT, FALLBACK, KEY, ORIGIN, PORT } from './env.js'
 import errors from './project/entries/errors/errors.js'
 
 const app = express()
 const upload = multer()
+const cert = `${CERT}/*.crt`
+const key = `${KEY}/*.key`
 
 app.use(helmet())
 app.use(compression())
@@ -23,5 +25,5 @@ entries.forEach(({ routes }) => routes({ app, build, upload }))
 errors(app, build)
 
 spdy
-  .createServer(certificates(), app)
+  .createServer(certificates({ cert, key }), app)
   .listen(PORT, () => console.log(`Listening on ${ORIGIN}:${PORT}${FALLBACK}`))
