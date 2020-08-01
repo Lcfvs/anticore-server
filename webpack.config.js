@@ -37,7 +37,7 @@ const configs = [
       minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
     },
     output: {
-      path: resolve('project/public/dist/assets'),
+      path: resolve('dist/assets'),
       filename: 'js/[name].min.js'
     },
     plugins: [
@@ -64,7 +64,7 @@ const configs = [
       minimizer: [new TerserJSPlugin({})]
     },
     output: {
-      path: resolve('project/public/dist'),
+      path: resolve('dist'),
       filename: '[name].min.js'
     }
   }

@@ -36,7 +36,6 @@ export default ({ app, build }) => {
       xhr
     }))
 
-    response.once('close', () => process.exit())
     response.end()
   })
 }

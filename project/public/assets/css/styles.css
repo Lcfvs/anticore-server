@@ -2,3 +2,4 @@
 @import "https://unpkg.com/@lcf.vs/css-ui@3.0.7/components/menu/expanded/expanded.min.css";
 @import "./common.css";
 @import "../../../../anticore-server/assets/css/style.css";
+@import "../../../../project/entries/test/defs/styles.css";
