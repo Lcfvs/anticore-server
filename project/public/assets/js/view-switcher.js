@@ -2,7 +2,8 @@ import { listen, on } from 'anticore'
 
 const history = []
 
-function replace (element) {console.log(element)
+function replace (element) {
+  console.log(element)
   const tag = element.nodeName.toLowerCase()
   const selector = tag !== 'meta'
     ? tag

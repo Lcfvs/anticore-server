@@ -1,5 +1,5 @@
-import webpack from 'webpack'
 import EventEmitter from 'events'
+import webpack from 'webpack'
 import config from '../webpack.config.js'
 
 const compiler = webpack(config)

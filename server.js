@@ -1,11 +1,12 @@
-import { FALLBACK, ORIGIN, PORT } from './env.js'
+import compression from 'compression'
 import express from 'express'
 import { readFileSync } from 'fs'
-import spdy from 'spdy'
 import multer from 'multer'
-import entries from './entries.js'
+import spdy from 'spdy'
 import build from './common/builders/build.js'
 import cache from './common/cache/cache.js'
+import entries from './entries.js'
+import { FALLBACK, ORIGIN, PORT } from './env.js'
 import errors from './project/entries/errors/errors.js'
 
 const app = express()
@@ -13,6 +14,7 @@ const upload = multer()
 const key = readFileSync('./certificates/localhost.key')
 const cert = readFileSync('./certificates/localhost.crt')
 
+app.use(compression())
 app.use(upload.array())
 app.use('/', express.static('project/public/dist'))
 app.use('/', express.static('project/public/statics'))

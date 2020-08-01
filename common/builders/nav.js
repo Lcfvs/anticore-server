@@ -1,5 +1,5 @@
-import nav, { item } from '../templates/nav.js'
 import entries from '../../entries.js'
+import nav, { item } from '../templates/nav.js'
 
 export default {
   ...nav,

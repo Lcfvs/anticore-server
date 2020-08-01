@@ -1,8 +1,8 @@
-import { production } from './env.js'
-import { resolve } from 'path'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import TerserJSPlugin from 'terser-webpack-plugin'
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
+import { resolve } from 'path'
+import TerserJSPlugin from 'terser-webpack-plugin'
+import { production } from './env.js'
 
 const mode = production ? 'production' : 'development'
 

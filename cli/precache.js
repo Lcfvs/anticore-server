@@ -1,5 +1,5 @@
-import '../cwd.cjs'
 import { resolve } from 'path'
+import '../cwd.cjs'
 
 const directory = resolve()
 
@@ -12,7 +12,7 @@ const defaults = {
     resolve('dist'),
     resolve('dist/assets/css/styles.min.css'),
     resolve('dist'),
-    resolve('dist'),
+    resolve('dist')
 
   ]
 }

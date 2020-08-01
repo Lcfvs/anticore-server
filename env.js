@@ -1,5 +1,5 @@
-import './cwd.cjs'
 import dotenv from 'dotenv'
+import './cwd.cjs'
 
 dotenv.config({
   path: './.env'

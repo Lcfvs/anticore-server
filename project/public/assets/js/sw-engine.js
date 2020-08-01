@@ -13,7 +13,8 @@ export default {
   async add (request) {
     return (await this.open()).add(clone(request))
   },
-  async addAll ([...requests]) {console.log(requests)
+  async addAll ([...requests]) {
+    console.log(requests)
     return (await this.open()).addAll(requests.map(clone))
   },
   async delete (request, { ...options } = {}) {

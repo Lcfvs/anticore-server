@@ -1,6 +1,6 @@
+import { readFileSync } from 'fs'
 import postcss from 'postcss'
 import modules from 'postcss-modules-sync'
-import { readFileSync } from 'fs'
 
 const cache = new Map()
 

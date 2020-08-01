@@ -1,5 +1,5 @@
-import '../../../../cwd.cjs'
 import glob from 'glob'
+import '../../../../cwd.cjs'
 
 const statics = 'project/public/statics'
 const nodir = true

@@ -1,5 +1,5 @@
-import process from 'process'
 import { spawn } from 'child_process'
+import process from 'process'
 
 let child
 let exited
