@@ -118,6 +118,7 @@ main.anticore-server fieldset p {
   display: inline-block;
   width: calc(50% - 2em);
   float: left;
+  margin-bottom: 1rem;
 }
 
 main.anticore-server fieldset p:nth-child(even) {
@@ -127,7 +128,10 @@ main.anticore-server fieldset p:nth-child(even) {
 main.anticore-server fieldset:first-of-type input {
   left: 8em;
   position: absolute;
-  width: calc(100% - 8.5em)
+  width: calc(100% - 8.5em);
+  margin: 0;
+  font: 400 0.833em Arial;
+  border-style: hidden;
 }
 
 main.anticore-server a {
