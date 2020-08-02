@@ -1,6 +1,6 @@
 {
   "name": "anticore-server",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "**[ALPHA]** An anticore server example",
   "type": "module",
   "main": "server.js",
