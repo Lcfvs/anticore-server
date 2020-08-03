@@ -20,18 +20,14 @@ function reduce (classes, key) {
   }
 }
 
-export default function styles (path, strict = false) {
+export default function styles (path) {
   if (!cache.has(path)) {
     cache.set(path, new Proxy(process(path), {
       get (target, name) {
-        let { [name]: value = null } = target
+        const { [name]: value = null } = target
 
         if (value === null) {
-          if (strict) {
-            throw new ReferenceError(`Unknown class: ${name}`)
-          }
-
-          value = name
+          throw new ReferenceError(`Unknown class: ${name}`)
         }
 
         return value
