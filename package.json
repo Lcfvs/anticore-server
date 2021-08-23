@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "eslint --report-unused-disable-directives ."
   },
-  "author": "lcf.vs <michael.rouges@gmail.com>",
+  "author": "Lcf.vs",
   "dependencies": {
     "@lcf.vs/dom-engine": "^5.2.4",
     "fastify": "^3.20.2",
