@@ -1,25 +1,26 @@
 {
   "name": "anticore-server",
-  "version": "0.9.0",
+  "version": "0.16.1",
   "description": "**[ALPHA]** A low learning curve anticore server",
   "type": "module",
   "exports": {
     ".": "./server.js",
     "./app.js": "./app.js",
     "./renderer.js": "./renderer.js",
-    "./resolve.js": "./resolve.js",
-    "./server.js": "./server.js",
-    "./template.js": "./template.js"
+    "./responder.js": "./responder.js",
+    "./server.js": "./server.js"
   },
   "scripts": {
     "lint": "eslint --report-unused-disable-directives ."
   },
   "author": "Lcf.vs",
   "dependencies": {
-    "@lcf.vs/dom-engine": "^5.2.4",
+    "@lcf.vs/dom-engine": "^5.2.5",
     "fastify": "^3.20.2",
+    "fastify-compress": "^3.6.0",
     "fastify-multipart": "^4.0.7",
-    "fastify-static": "^4.2.3"
+    "fastify-static": "^4.2.3",
+    "open": "^8.2.1"
   },
   "repository": {
     "type": "git",
@@ -38,7 +39,6 @@
   "homepage": "https://github.com/Lcfvs/anticore-server#readme",
   "devDependencies": {
     "esbuild": "^0.12.21",
-    "eslint": "^7.28.0",
-    "open": "^8.2.0"
+    "eslint": "^7.28.0"
   }
 }

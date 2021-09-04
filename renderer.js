@@ -1,5 +1,7 @@
-import { source, serialize } from './template.js'
-import { matches } from './hooks/xhr.js'
+import { serialize, source } from '@lcf.vs/dom-engine/lib/backend.js'
+import { readFile } from 'fs/promises'
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
 
 const {
   entries,
@@ -83,45 +85,26 @@ const renderXHR = ({
     }
 }
 
-export const sse = ({
-  error
-}) => reply => {
-  const {
-    raw
-  } = reply
+export { serialize, source }
 
-  raw.writeHead(200, {
-    'Cache-Control': 'no-cache',
-    'Content-Type': 'text/event-stream',
-    'Connection': 'keep-alive'
-  })
+export const sse = async ({ error }, template, data, errors) =>
+  eol(await serialize(renderEvent({ error }, template, data, errors)))
 
-  return async (type, id, template, {
-    data,
-    errors = null
-  } = {}) => {
-    const result = renderEvent({ error }, template, data, errors)
+export const view = async ({
+  error,
+  fragment,
+  layout
+}, view, data, errors, xhr = false) => {
+  const method = xhr ? renderXHR : renderPage
 
-    raw.write(`id: ${id}\n`)
-    raw.write(`type: ${type}\n`)
-    raw.write(`data: ${eol(await serialize(result))}\n\n`)
-  }
+  return serialize(method({ error, fragment, layout }, view, data, errors))
 }
 
-export const view = ({
- error,
- fragment,
- layout
-}, type = 'text/html; charset=utf-8') => async (reply, view, {
-  data,
-  errors = null,
-  code = errors ? 422 : 200
-} = {}) => {
-  const method = matches(reply) ? renderXHR : renderPage
-  const result = method({ error, fragment, layout }, view, data, errors)
+export const template = async ({ url }, { ...data } = {}) => {
+  const path = resolve(dirname(fileURLToPath(url)), './template.html')
 
-  return reply
-    .status(code)
-    .type(type)
-    .send(await serialize(result))
+  return {
+    [source]: `${await readFile(path)}`,
+    ...data
+  }
 }

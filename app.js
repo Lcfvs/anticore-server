@@ -1,25 +1,15 @@
 import { resolve } from 'path'
-import { cwd, env } from 'process'
+import { cwd } from 'process'
 import fastify from 'fastify'
 import bodyHook from './hooks/body.js'
-import cspHook from './hooks/csp.js'
 import xhrHook from './hooks/xhr.js'
+import compressPlugin from './plugins/compress.js'
 import multipartPlugin from './plugins/multipart.js'
 import staticsPlugin from './plugins/statics.js'
 
 export default ({
-  app = {
-    logger: env.NODE_ENV !== 'production'
-  },
-  csp = [
-    `default-src 'none'`,
-    `connect-src 'self'`,
-    `script-src 'self'`,
-    `img-src 'self'`,
-    `style-src 'self'`,
-    `require-trusted-types-for 'script'`,
-    `trusted-types anticore`
-  ],
+  app = {},
+  compress = {},
   multipart = {
     attachFieldsToBody: true
   },
@@ -30,9 +20,9 @@ export default ({
 } = {}) => {
   const instance = fastify(app)
 
+  compressPlugin(instance, compress)
   staticsPlugin(instance, statics)
   multipartPlugin(instance, multipart)
-  cspHook(instance, csp)
   xhrHook(instance)
   bodyHook(instance)
 
