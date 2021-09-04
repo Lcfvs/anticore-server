@@ -1,6 +1,6 @@
 {
   "name": "anticore-server",
-  "version": "0.16.1",
+  "version": "0.16.2",
   "description": "**[ALPHA]** A low learning curve anticore server",
   "type": "module",
   "exports": {
@@ -15,7 +15,7 @@
   },
   "author": "Lcf.vs",
   "dependencies": {
-    "@lcf.vs/dom-engine": "^5.2.5",
+    "@lcf.vs/dom-engine": "^5.3.0",
     "fastify": "^3.20.2",
     "fastify-compress": "^3.6.0",
     "fastify-multipart": "^4.0.7",
