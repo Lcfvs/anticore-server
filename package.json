@@ -1,7 +1,7 @@
 {
   "name": "anticore-server",
-  "version": "0.16.4",
-  "description": "**[ALPHA]** A low learning curve anticore server",
+  "version": "1.0.0",
+  "description": "A low learning curve anticore server",
   "type": "module",
   "exports": {
     ".": "./server.js",
