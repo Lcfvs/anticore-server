@@ -85,7 +85,7 @@ const renderXHR = ({
     }
 }
 
-export { serialize, source }
+export { load, serialize, source }
 
 export const sse = async ({ error }, template, data, errors) =>
   eol(await serialize(renderEvent({ error }, template, data, errors)))
@@ -100,11 +100,3 @@ export const view = async ({
   return serialize(method({ error, fragment, layout }, view, data, errors))
 }
 
-export const template = async ({ url }, { ...data } = {}) => {
-  const path = resolve(dirname(fileURLToPath(url)), './template.html')
-
-  return {
-    [source]: `${await readFile(path)}`,
-    ...data
-  }
-}

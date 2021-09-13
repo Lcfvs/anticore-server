@@ -66,10 +66,10 @@ const application = app({
 
 #### src/templates/layout/layout.js
 ```js
-import { template } from 'anticore-server/renderer.js'
+import { load } from 'anticore-server/renderer.js'
 
 // loads the ./template.html and associates the provided properties
-export default await template(import.meta, {
+export default await load(import.meta, {}, {
   branding: 'anticore-server',
   view: null // just to know which properties can be filled later, on every clone
 })
@@ -87,9 +87,9 @@ export default await template(import.meta, {
 
 #### src/templates/fragment/fragment.js
 ```js
-import { template } from 'anticore-server/renderer.js'
+import { load } from 'anticore-server/renderer.js'
 
-export default await template(import.meta, {
+export default await load(import.meta, {},  {
   view: null
 })
 ```
@@ -104,9 +104,9 @@ export default await template(import.meta, {
 
 #### src/templates/error/error.js
 ```js
-import { template } from 'anticore-server/renderer.js'
+import { load } from 'anticore-server/renderer.js'
 
-export default await template(import.meta, {
+export default await load(import.meta, {}, {
   name: null,
   message: null
 })
@@ -123,9 +123,9 @@ export default await template(import.meta, {
 
 #### src/templates/views/home/home.js
 ```js
-import { template } from 'anticore-server/renderer.js'
+import { load } from 'anticore-server/renderer.js'
 
-export default await template(import.meta, {
+export default await load(import.meta, {}, {
   class: 'home',
   description: 'A homepage description',
   title: 'A homepage title'
@@ -141,9 +141,9 @@ export default await template(import.meta, {
 
 #### src/templates/sse/message/message.js
 ```js
-import { template } from 'anticore-server/renderer.js'
+import { load } from 'anticore-server/renderer.js'
 
-export default await template(import.meta, {
+export default await load(import.meta, {}, {
   content: null
 })
 ```
@@ -268,6 +268,10 @@ await serve(app)
 ## Need some interactivity?
 
 See it in action into the [anticore](https://github.com/Lcfvs/anticore) [demo](https://glitch.com/edit/#!/anticore-demo?path=src%2Fserve.js%3A1%3A0)
+
+## Changelog
+
+[changelog](./changelog.md)
 
 ## License
 
