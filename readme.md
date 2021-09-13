@@ -43,7 +43,7 @@ const application = app({
 
 ### A `layout` template
 
-#### src/templates/layout/template.html
+#### src/templates/layout/layout.html
 
 ```html
 <!DOCTYPE html>
@@ -77,7 +77,7 @@ export default await load(import.meta, {}, {
 
 ### A `fragment` template
 
-#### src/templates/fragment/template.html
+#### src/templates/fragment/fragment.html
 
 ```html
 <meta name="description" content="{view.description}" />
@@ -96,7 +96,7 @@ export default await load(import.meta, {},  {
 
 ### An `error` template
 
-#### src/templates/error/template.html
+#### src/templates/error/error.html
 
 ```html
 <ins class="error" data-after="form [name='{name}']">{message}</ins>
@@ -114,7 +114,7 @@ export default await load(import.meta, {}, {
 
 ### A `view` template
 
-#### src/templates/view/home/template.html
+#### src/templates/view/home/home.html
 ```html
 <main class="{class}">
   <h1>{title}</h1>
@@ -134,7 +134,7 @@ export default await load(import.meta, {}, {
 
 ### A `sse` template
 
-#### src/templates/sse/message/template.html
+#### src/templates/sse/message/message.html
 ```html
 <li class="message">{content}</li>
 ```
