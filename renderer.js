@@ -1,4 +1,4 @@
-import { serialize, source } from '@lcf.vs/dom-engine/lib/backend.js'
+import { load, serialize, source } from '@lcf.vs/dom-engine/lib/backend.js'
 import { readFile } from 'fs/promises'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
