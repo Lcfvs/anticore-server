@@ -11,34 +11,6 @@ A low learning curve [anticore](https://github.com/Lcfvs/anticore) server, based
 
 `npm i anticore-server`
 
-## Create an app
-
-### src/lib/app.js
-
-```js
-import app from 'anticore-server/app.js'
-import { resolve } from 'path'
-import { cwd } from 'process'
-
-const application = app({
-  /*
-  // fastify options, no defaults
-  app: {},
-  // fastify-compress options, no defaults
-  compress: {},
-  // fastify-multipart options, with the following defaults
-  multipart: {
-    attachFieldsToBody: true
-  },
-  // fastify-static options, with the following defaults
-  statics: {
-    prefix: '/assets/',
-    root: path.resolve(cwd(), `src/assets`)
-  }
-  */
-})
-```
-
 ## Create the templates
 
 ### A `layout` template
@@ -68,7 +40,7 @@ const application = app({
 ```js
 import { load } from 'anticore-server/renderer.js'
 
-// loads the ./template.html and associates the provided properties
+// loads the ./layout.html and associates the provided properties
 export default await load(import.meta, {}, {
   branding: 'anticore-server',
   view: null // just to know which properties can be filled later, on every clone
@@ -102,7 +74,7 @@ export default await load(import.meta, {},  {
 <ins class="error" data-after="form [name='{name}']">{message}</ins>
 ```
 
-#### src/templates/error/error.js
+#### src/templates/error/invalid.js
 ```js
 import { load } from 'anticore-server/renderer.js'
 
@@ -112,16 +84,18 @@ export default await load(import.meta, {}, {
 })
 ```
 
-### A `view` template
+### Some `view` templates
 
-#### src/templates/view/home/home.html
+#### The `home`
+
+##### src/templates/view/home/home.html
 ```html
 <main class="{class}">
   <h1>{title}</h1>
 </main>
 ```
 
-#### src/templates/views/home/home.js
+##### src/templates/views/home/home.js
 ```js
 import { load } from 'anticore-server/renderer.js'
 
@@ -129,6 +103,50 @@ export default await load(import.meta, {}, {
   class: 'home',
   description: 'A homepage description',
   title: 'A homepage title'
+})
+```
+
+#### The `Not Found`
+
+##### src/templates/view/error404/error404.html
+```html
+<main class="{class}">
+  <h1>{title}</h1>
+  {content}
+</main>
+```
+
+##### src/templates/views/error404/error404.js
+```js
+import { load } from 'anticore-server/renderer.js'
+
+export default await load(import.meta, {}, {
+  class: 'error error404',
+  description: 'Page not found',
+  title: 'Page not found',
+  content: null
+})
+```
+
+#### The `Internal Server Error`
+
+##### src/templates/view/error500/error500.html
+```html
+<main class="{class}">
+  <h1>{title}</h1>
+  {content}
+</main>
+```
+
+##### src/templates/views/error500/error500.js
+```js
+import { load } from 'anticore-server/renderer.js'
+
+export default await load(import.meta, {}, {
+  class: 'error error500',
+  description: 'Internal Server Error',
+  title: 'Internal Server Error',
+  content: null
 })
 ```
 
@@ -195,6 +213,59 @@ await view(reply, template, {
   code: 200
   */
 })
+```
+
+## Create an app
+
+### src/lib/app.js
+
+```js
+import createApp from 'anticore-server/app.js'
+// import { resolve } from 'path'
+// import { cwd } from 'process'
+import { view } from '../lib/responder.js'
+import error404 from '../templates/views/error404/error404.js'
+import error500 from '../templates/views/error500/error500.js'
+
+const app = createApp({
+  /*
+  // fastify options, no defaults
+  app: {},
+  // fastify-compress options, no defaults
+  compress: {},
+  // fastify-multipart options, with the following defaults
+  multipart: {
+    attachFieldsToBody: true
+  },
+  // fastify-static options, with the following defaults
+  statics: {
+    prefix: '/assets/',
+    root: path.resolve(cwd(), `src/assets`)
+  }
+  */
+})
+
+app.setNotFoundHandler(async (request, reply) => {
+  return view(reply, error404, {
+    data: {
+      content: 'Unable to locate the requested page'
+    },
+    code: 404
+  })
+})
+
+app.setErrorHandler(async (error, request, reply) => {
+  request.log.error(error)
+  
+  return view(reply, error500, {
+    data: {
+      content: 'Oops, an unexcpected error was thrown'
+    },
+    code: 500
+  })
+})
+
+export default app
 ```
 
 ## Create some routes
