@@ -86,7 +86,7 @@ export default await load(import.meta, {}, {
 
 ### A `view` component
 
-##### src/templates/components/view.html
+##### src/templates/components/view/view.html
 ```html
 <main class="{class}">
   <h1>{title}</h1>
@@ -94,7 +94,7 @@ export default await load(import.meta, {}, {
 </main>
 ```
 
-##### src/templates/components/view.js
+##### src/templates/components/view/view.js
 ```js
 import { load } from 'anticore-server/renderer.js'
 
@@ -112,7 +112,7 @@ export default await load(import.meta, {}, {
 
 ##### src/templates/views/home/home.js
 ```js
-import view from '../../components/view.js'
+import view from '../../components/view/view.js'
 
 export default {
   ...view,
@@ -127,7 +127,7 @@ export default {
 
 ##### src/templates/views/error404/error404.js
 ```js
-import view from '../../components/view.js'
+import view from '../../components/view/view.js'
 
 export default {
   ...view,
@@ -142,7 +142,7 @@ export default {
 
 ##### src/templates/views/error500/error500.js
 ```js
-import view from '../../components/view.js'
+import view from '../../components/view/view.js'
 
 export default {
   ...view,
