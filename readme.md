@@ -84,77 +84,80 @@ export default await load(import.meta, {}, {
 })
 ```
 
+### A `view` component
+
+##### src/templates/components/view.html
+```html
+<main class="{class}">
+  <h1>{title}</h1>
+  {contents}
+</main>
+```
+
+##### src/templates/components/view.js
+```js
+import { load } from 'anticore-server/renderer.js'
+
+export default await load(import.meta, {}, {
+  class: null,
+  contents: null,
+  description: null,
+  title: null
+})
+```
+
 ### Some `view` templates
 
 #### The `home`
 
-##### src/templates/view/home/home.html
-```html
-<main class="{class}">
-  <h1>{title}</h1>
-</main>
-```
-
 ##### src/templates/views/home/home.js
 ```js
-import { load } from 'anticore-server/renderer.js'
+import view from '../../components/view.js'
 
-export default await load(import.meta, {}, {
+export default {
+  ...view,
   class: 'home',
+  contents: 'A home view content',
   description: 'A homepage description',
   title: 'A homepage title'
-})
+}
 ```
 
 #### The `Not Found`
 
-##### src/templates/view/error404/error404.html
-```html
-<main class="{class}">
-  <h1>{title}</h1>
-  {content}
-</main>
-```
-
 ##### src/templates/views/error404/error404.js
 ```js
-import { load } from 'anticore-server/renderer.js'
+import view from '../../components/view.js'
 
-export default await load(import.meta, {}, {
+export default {
+  ...view,
   class: 'error error404',
+  contents: null,
   description: 'Page not found',
-  title: 'Page not found',
-  content: null
-})
+  title: 'Page not found'
+}
 ```
 
 #### The `Internal Server Error`
 
-##### src/templates/view/error500/error500.html
-```html
-<main class="{class}">
-  <h1>{title}</h1>
-  {content}
-</main>
-```
-
 ##### src/templates/views/error500/error500.js
 ```js
-import { load } from 'anticore-server/renderer.js'
+import view from '../../components/view.js'
 
-export default await load(import.meta, {}, {
+export default {
+  ...view,
   class: 'error error500',
+  contents: null,
   description: 'Internal Server Error',
-  title: 'Internal Server Error',
-  content: null
-})
+  title: 'Internal Server Error'
+}
 ```
 
 ### A `sse` template
 
 #### src/templates/sse/message/message.html
 ```html
-<li class="message">{content}</li>
+<li class="message">{contents}</li>
 ```
 
 #### src/templates/sse/message/message.js
@@ -162,7 +165,7 @@ export default await load(import.meta, {}, {
 import { load } from 'anticore-server/renderer.js'
 
 export default await load(import.meta, {}, {
-  content: null
+  contents: null
 })
 ```
 
@@ -240,7 +243,7 @@ const app = createApp({
   // fastify-static options, with the following defaults
   statics: {
     prefix: '/assets/',
-    root: path.resolve(cwd(), `src/assets`)
+    root: resolve(cwd(), `src/assets`)
   }
   */
 })
@@ -248,7 +251,7 @@ const app = createApp({
 app.setNotFoundHandler(async (request, reply) => {
   return view(reply, error404, {
     data: {
-      content: 'Unable to locate the requested page'
+      contents: 'Unable to locate the requested page'
     },
     code: 404
   })
@@ -256,10 +259,10 @@ app.setNotFoundHandler(async (request, reply) => {
 
 app.setErrorHandler(async (error, request, reply) => {
   request.log.error(error)
-  
+
   return view(reply, error500, {
     data: {
-      content: 'Oops, an unexcpected error was thrown'
+      contents: 'Oops, an unexcpected error was thrown'
     },
     code: 500
   })

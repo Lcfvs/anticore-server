@@ -1,6 +1,6 @@
 {
   "name": "anticore-server",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A low learning curve anticore server",
   "type": "module",
   "exports": {
