@@ -1,15 +1,17 @@
 # anticore-server
 
 A low learning curve [anticore](https://github.com/Lcfvs/anticore) server, based on
- * [@lcf.vs/dom-engine](https://github.com/Lcfvs/dom-engine)
- * [fastify](https://github.com/fastify/fastify)
- * [fastify-compress](https://github.com/fastify/fastify-compress)
- * [fastify-multipart](https://github.com/fastify/fastify-multipart)
- * [fastify-static](https://github.com/fastify/fastify-static)
+* [@lcf.vs/dom-engine](https://github.com/Lcfvs/dom-engine)
+* [fastify](https://github.com/fastify/fastify)
+* [fastify-compress](https://github.com/fastify/fastify-compress)
+* [fastify-multipart](https://github.com/fastify/fastify-multipart)
+* [fastify-static](https://github.com/fastify/fastify-static)
 
 ## Install
 
 `npm i anticore-server`
+
+## Create the templates
 
 ## Create the templates
 
@@ -20,19 +22,19 @@ A low learning curve [anticore](https://github.com/Lcfvs/anticore) server, based
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="{view.description}" />
-    <title>{view.title} - anticore-demo</title>
-  </head>
-  <body>
-    <header>
-      <h1>{branding}</h1>
-      <ol class="messages"></ol>
-    </header>
-    {view}
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{view.description}" />
+  <title>{view.title} - anticore-demo</title>
+</head>
+<body>
+<header>
+  <h1>{branding}</h1>
+  <ol class="messages"></ol>
+</header>
+{view}
+</body>
 </html>
 ```
 
@@ -84,13 +86,71 @@ export default await load(import.meta, {}, {
 })
 ```
 
+### Some `view` templates
+
+#### The `home`
+
+##### src/templates/view/home/home.html
+```html
+<main class="{class}">
+  <h1>{title}</h1>
+</main>
+```
+
+##### src/templates/views/home/home.js
+```js
+import { load } from 'anticore-server/renderer.js'
+
+export default await load(import.meta, {}, {
+  class: 'home',
+  description: 'A homepage description',
+  title: 'A homepage title'
+})
+```
+
+### A `fragment` template
+
+#### src/templates/fragment/fragment.html
+
+```html
+<meta name="description" content="{view.description}" />
+<title>{view.title}</title>
+{view}
+```
+
+#### src/templates/fragment/fragment.js
+```js
+import { load } from 'anticore-server/renderer.js'
+
+export default await load(import.meta, {},  {
+  view: null
+})
+```
+
+### An `error` template
+
+#### src/templates/error/error.html
+
+```html
+<ins class="error" data-after="form [name='{name}']">{message}</ins>
+```
+
+#### src/templates/error/invalid.js
+```js
+import { load } from 'anticore-server/renderer.js'
+
+export default await load(import.meta, {}, {
+  name: null,
+  message: null
+})
+```
+
 ### A `view` component
 
 ##### src/templates/components/view/view.html
 ```html
 <main class="{class}">
   <h1>{title}</h1>
-  {contents}
 </main>
 ```
 
@@ -179,6 +239,9 @@ import error from '../templates/error/error.js'
 import fragment from '../templates/fragment/fragment.js'
 import layout from '../templates/layout/layout.js'
 
+// Used for the partials
+export const partial = responder.partial({ error })
+
 // Used for the views
 export const view = responder.view({ error, fragment, layout })
 
@@ -197,6 +260,23 @@ await event(eventName, id, template, {
   /*
   // Optional object, rendered using the error template
   errors: null
+  */
+})
+```
+
+#### `partial(reply)`
+
+Returns an `async` function to reply a partial to the client
+
+```js
+await partial(reply, template, {
+  // Your dynamic data
+  data: {},
+  /*
+  // Optional object, rendered using the error template
+  errors: null,
+  // optional code, resolved like this by default `errors ? 422 : 200`
+  code: 200
   */
 })
 ```

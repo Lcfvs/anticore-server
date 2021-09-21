@@ -1,4 +1,4 @@
-import { load, serialize, source } from '@lcf.vs/dom-engine/lib/backend.js'
+import { load, serialize, source, template } from '@lcf.vs/dom-engine/lib/backend.js'
 import { readFile } from 'fs/promises'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
@@ -20,8 +20,6 @@ const contents = {
   }
 }
 
-const eol = str => str.split('\n').join('&#10;')
-
 const renderError = function([name, {
   message
 }]) {
@@ -39,20 +37,6 @@ const renderErrors = (error, errors) =>
   fromEntries(entries(errors)
     .map(renderError, error))
 
-const renderEvent = ({
-  error
-}, template, data, errors) => {
-  return errors ?
-    {
-      ...contents,
-      errors: values(renderErrors(error, errors))
-    } :
-    {
-      ...template,
-      data
-    }
-}
-
 const renderPage = ({
   error,
   layout
@@ -65,6 +49,20 @@ const renderPage = ({
       errors: errors && renderErrors(error, errors)
     }
   }
+}
+
+const renderPartial = ({
+  error
+}, template, data, errors) => {
+  return errors ?
+    {
+      ...contents,
+      errors: values(renderErrors(error, errors))
+    } :
+    {
+      ...template,
+      data
+    }
 }
 
 const renderXHR = ({
@@ -85,10 +83,10 @@ const renderXHR = ({
     }
 }
 
-export { load, serialize, source }
+export { load, serialize, source, template }
 
-export const sse = async ({ error }, template, data, errors) =>
-  eol(await serialize(renderEvent({ error }, template, data, errors)))
+export const partial = async ({ error }, template, data, errors) =>
+  serialize(renderPartial({ error }, template, data, errors))
 
 export const view = async ({
   error,

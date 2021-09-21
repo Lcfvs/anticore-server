@@ -3,6 +3,8 @@ import { matches } from './hooks/xhr.js'
 
 const html = 'text/html; charset=utf-8'
 
+const eol = str => str.split('\n').join('&#10;')
+
 export const sse = ({
   error
 }) => {
@@ -23,11 +25,29 @@ export const sse = ({
       data,
       errors = null
     } = {}) => {
+      const message = await renderer.partial(commons, template, data, errors)
 
       raw.write(`id: ${id}\n`)
       raw.write(`type: ${type}\n`)
-      raw.write(`data: ${await renderer.sse(commons, template, data, errors)}\n\n`)
+      raw.write(`data: ${eol(message)}\n\n`)
     }
+  }
+}
+
+export const partial = ({ error }, type = html) => {
+  const commons = { error }
+
+  return async (reply, template, {
+    data,
+    errors = null,
+    code = errors ? 422 : 200
+  } = {}) => {
+    const message = await renderer.partial(commons, template, data, errors)
+
+    return reply
+      .status(code)
+      .type(type)
+      .send(message)
   }
 }
 
@@ -40,10 +60,11 @@ export const view = ({ error, fragment, layout }, type = html) => {
     code = errors ? 422 : 200
   } = {}) => {
     const xhr = matches(reply)
+    const message = await renderer.view(commons, template, data, errors, xhr)
 
     return reply
       .status(code)
       .type(type)
-      .send(await renderer.view(commons, template, data, errors, xhr))
+      .send(message)
   }
 }
